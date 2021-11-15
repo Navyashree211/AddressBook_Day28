@@ -1,43 +1,25 @@
 /*
- * UC5- TO Add multiple person to Address Book..
+ *UC6- Refactor to Add multiple AddressBook to the system. Each AddressBook has a unique Name .
  * 
  * @author : Navaya Shree
  */
 package com.BL.Addressbook;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-
-public class AddressBook {    
+public class AddressBook {
 	static List<ContactPerson> contactList = new ArrayList<>();
 	static Scanner sc = new Scanner(System.in);
-	
-	  public static void main(String[] args) {
-	        int i=0;
-	        AddressBook addressBook = new AddressBook();
-	        while (i == 0) {
-	            System.out.println("Do you would like to continue?: ");
-	            System.out.println("1.Add details.\n2.Edit details.\n3.Delete the details");
-	            int choose = sc.nextInt();
-	            switch (choose) {
-	                case 1:
-	                	addressBook.addContact();
-	                    break;
-	                case 2:
-	                	addressBook.editContact();
-	                    break;
-	                case 3:
-	                	addressBook.deleteContact();
-	                    break;
-	                default:
-	                    i = 1;
-	                    System.out.println("Wrong option");
-	                    addressBook.addContact();
-	                    break;
-	            }
-	        }
-	  }
+
+	static HashMap<String, ArrayList<ContactPerson>> hashmap = new HashMap<>();
+	static AddressBook addressBook = new AddressBook();
+
+	public static void main(String[] args) {
+		addressBook.createAddressBook();
+	}
 
 	// method for adding contacts in list.
 	public static void addContact() {
@@ -84,6 +66,112 @@ public class AddressBook {
 				contactList.remove(increment);
 			} else {
 				System.out.println(" Name does not exist");
+			}
+		}
+	}
+
+	// Method to create the multiple AddressBook
+	public void createAddressBook() {
+
+		while (true) {
+			System.out.println("Choose what you want to do: ");
+			System.out.println(
+					"1.Create new address book.\n2.Edit existing address book.\n3.Display all address books.\n4.exit");
+			int choose = sc.nextInt();
+
+			if (choose == 4) {
+				System.out.println("Exited");
+				break;
+			}
+
+			switch (choose) {
+			case 1:
+				System.out.println("Enter the name of address book: ");
+				String address_name = sc.next();
+
+				// condition to check for uniqueness of address book.
+				if (hashmap.containsKey(address_name)) {
+					System.out.println("Adress book name exits, enter different name");
+					break;
+				}
+
+				ArrayList<ContactPerson> new_address_book = new ArrayList<>();
+				contactList = new_address_book;
+				while (true) {
+					int choose1;
+					System.out.println("Choose what you want to do: ");
+					System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact.\n4.Exit");
+					choose1 = sc.nextInt();
+					if (choose1 == 4) {
+						System.out.println("Exited");
+						break;
+					}
+					switch (choose1) {
+					case 1:
+						addressBook.addContact();
+						break;
+					case 2:
+						addressBook.editContact();
+						break;
+					case 3:
+						addressBook.deleteContact();
+						break;
+					default:
+						System.out.println("Choose valid option");
+						break;
+					}
+					hashmap.put(address_name, (ArrayList<ContactPerson>) contactList);
+					System.out.println(hashmap);
+				}
+				break;
+
+			case 2:
+				System.out.println("Enter the name of address book: ");
+				String address_name_old = sc.next();
+
+				// condition to check whether address book exists or no.
+				if (hashmap.containsKey(address_name_old)) {
+
+					ArrayList<ContactPerson> old_address_book = new ArrayList<>();
+					contactList = old_address_book;
+					contactList = hashmap.get(address_name_old);
+					while (true) {
+						System.out.println("Choose what you want to do: ");
+						System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact.\n4.Exit");
+						int choose2 = sc.nextInt();
+						if (choose2 == 4) {
+							System.out.println("Exited");
+							break;
+						}
+						switch (choose2) {
+						case 1:
+							addressBook.addContact();
+							break;
+						case 2:
+							addressBook.editContact();
+							break;
+						case 3:
+							addressBook.deleteContact();
+							break;
+						default:
+							System.out.println("Choose valid option");
+							break;
+						}
+						hashmap.put(address_name_old, (ArrayList<ContactPerson>) contactList);
+						System.out.println(hashmap);
+					}
+				} else {
+					System.out.println("Enter valid address book name");
+				}
+				break;
+
+			case 3:
+				System.out.println(hashmap);
+				break;
+
+			default:
+				System.out.println("Enter valid option");
+
 			}
 		}
 	}
