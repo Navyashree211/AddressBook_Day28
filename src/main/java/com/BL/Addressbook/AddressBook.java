@@ -1,5 +1,5 @@
 /*
- * UC7- Ability to ensure there is no duplicate entry of the same person in a particular address book.
+ * UC-8: Ability to search person in a city or state across the multiple address book.
  * 
  * @author : Navaya Shree
  */
@@ -36,9 +36,9 @@ public class AddressBook {
 		long phoneNumber = input.nextLong();
 		System.out.println(" Enter your email : ");
 		String email = input.nextLine();
-
 		ContactPerson addressBook = new ContactPerson(firstName, lastName, email, city, state, phoneNumber, zip);
 		contactList.add(addressBook);
+
 	}
 
 // method for editing existing contact
@@ -67,5 +67,17 @@ public class AddressBook {
 				System.out.println(" Name does not exist");
 			}
 		}
+	}
+
+	// Search a person
+	public void searchByCity() {
+		Scanner cityInput = new Scanner(System.in);
+		System.out.println(" Enter the city name you want to get contact details ");
+		String city = cityInput.nextLine();
+		for (ContactPerson cityList : contactList) {
+			if (cityList.getCity().equals(city))
+				System.out.println(cityList);
+		}
+
 	}
 }
