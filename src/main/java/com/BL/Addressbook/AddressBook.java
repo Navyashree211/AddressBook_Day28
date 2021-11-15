@@ -1,5 +1,5 @@
 /*
- * UC1: To create a contacts in Address Book with first and last names, address, city, state, zip, phoneNumber, and email .
+ *  UC2- Add a new Contact to Address book.
  * 
  * @author : Navaya Shree
  */
@@ -10,10 +10,10 @@ import java.util.Scanner;
 
 
 public class AddressBook {   
-	static List<ContactPerson> contactList = new ArrayList<>();
+	static List<ContactPerson> contactList = new ArrayList<ContactPerson>();
 	static Scanner sc = new Scanner(System.in);
 
-	// method for adding contacts
+	// method for adding contacts in list.
 	public static void addContact() {
 		System.out.println(" Enter your first name : ");
 		String firstName = sc.nextLine();
@@ -30,15 +30,30 @@ public class AddressBook {
 		System.out.println(" Enter your email : ");
 		String email = sc.nextLine();
 
-		ContactPerson addressBook = new ContactPerson(firstName, lastName, email, city, state, phoneNumber,zip);
+		ContactPerson addressBook = new ContactPerson(firstName, lastName, email, city, state, phoneNumber, zip);
 		contactList.add(addressBook);
-
 	}
 
 	// main Method
 	public static void main(String[] args) {
-		System.out.println(" Welcome to address book program ");
-		addContact();
+		Scanner obj = new Scanner(System.in);
+		int flag = 1;
+		while (flag == 1) {
+			System.out.println(" Choose your choice : 1.Add 2.Exit ");
+			int choice = obj.nextInt();
+			switch (choice) {
+			case 1:
+				addContact();
+				break;
+			case 2:
+				flag = 0;
+				break;
+			default:
+				System.out.println("Enter a valid choice");
+				break;
+			}
+		}
+
 		System.out.println(contactList);
 	}
 }
