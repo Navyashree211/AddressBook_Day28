@@ -1,5 +1,5 @@
 /*
- * UC-10: Ability to get number of contact by city or state.
+ * UC-11: Ability to sort the entries in the address book alphabetically by person's name .
  * 
  * @author : Navaya Shree
  */
