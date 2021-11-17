@@ -1,14 +1,24 @@
 package com.BL.Addressbook;
 
 public class ContactPerson {
-	private String firstName, lastName, city, state, email;
-	private long phoneNumber, zip;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String city;
+	private String state;
+	private int zip;
+	private long phoneNumber;
+	private String email;
 
-	ContactPerson(String firstName, String lastName, String email, String city, String state, long phoneNumber,
-			long zip) {
-		super();
+	public ContactPerson() {
+
+	}
+
+	public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip,
+			long phoneNumber, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
@@ -18,6 +28,7 @@ public class ContactPerson {
 
 	public String getFirstName() {
 		return firstName;
+
 	}
 
 	public void setFirstName(String firstName) {
@@ -30,6 +41,14 @@ public class ContactPerson {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getCity() {
@@ -48,12 +67,12 @@ public class ContactPerson {
 		this.state = state;
 	}
 
-	public String getEmail() {
-		return email;
+	public int getZip() {
+		return zip;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setZip(int zip) {
+		this.zip = zip;
 	}
 
 	public long getPhoneNumber() {
@@ -64,18 +83,11 @@ public class ContactPerson {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public long getZip() {
-		return zip;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setZip(long zip) {
-		this.zip = zip;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	@Override
-	public String toString() {
-		return "ContactPerson [firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", state="
-				+ state + ", email=" + email + ", phoneNumber=" + phoneNumber + ", zip=" + zip + "]";
-	}
-
 }
